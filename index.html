@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dov'è Fabrizio?</title>
+  <style>
+    :root {
+      --bg1: #0b1020;
+      --bg2: #111b3a;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --accent: #8be9fd;
+      --accent2: #bd93f9;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100svh;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 800px at 20% 15%, rgba(189,147,249,.35), transparent 60%),
+        radial-gradient(900px 600px at 85% 25%, rgba(139,233,253,.28), transparent 55%),
+        radial-gradient(1200px 900px at 50% 120%, rgba(255,184,108,.18), transparent 55%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      display: grid;
+      place-items: center;
+      padding: 28px 16px;
+    }
+
+    .wrap {
+      width: min(880px, 100%);
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 34px 28px 24px;
+      position: relative;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+
+    h1 {
+      margin: 16px 0 8px;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2.2vw, 20px);
+      line-height: 1.5;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      padding: 0 28px 28px;
+    }
+
+    @media (max-width: 760px) {
+      .row { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+    }
+
+    .quote {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .quote strong { color: white; }
+    .meta {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      padding: 16px 16px;
+      cursor: pointer;
+      color: #071019;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: .2px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      transition: transform .08s ease, filter .12s ease;
+      user-select: none;
+    }
+    .btn:hover { filter: brightness(1.06); }
+    .btn:active { transform: translateY(1px) scale(.99); }
+
+    .small {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .footer {
+      padding: 16px 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+    }
+    .pill {
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="card">
+      <div class="hero">
+        <span class="badge">⛪ Localizzatore Parrocchiale • modalità “scherzo gentile”</span>
+        <h1>Dov’è Fabrizio?</h1>
+        <p class="subtitle">Premi il bottone e ti indico <em>con certezza spirituale</em> una chiesa a caso nel mondo.</p>
+      </div>
+
+      <div class="row">
+        <div class="panel" aria-live="polite">
+          <p class="quote" id="quote">
+            <strong>Avviso liturgico:</strong> Fabrizio potrebbe essere in fase di riscaldamento vocale… in luogo consacrato.
+          </p>
+          <div class="meta" id="meta">Nessuna chiesa selezionata (ancora).</div>
+        </div>
+
+        <div class="panel">
+          <button class="btn" id="btn">🔎 Avvia il “cercafabbrizio”</button>
+          <div class="small">
+            Si apre Google Maps in una nuova scheda.<br/>
+            <span class="pill">Suggerimento:</span> cambiare le chiese è facilissimo: modifica l’array <code>CHURCHES</code>.
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span class="pill" id="counter">0 invocazioni</span>
+        <span>Made for amici & risate • <span class="pill">100% no blasfemia</span></span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Lista di chiese (nome + coordinate). Puoi aggiungerne quante vuoi.
+    const CHURCHES = [
+      { name: "Basilica di San Pietro (Città del Vaticano)", lat: 41.902168, lng: 12.453937 },
+      { name: "Sagrada Família (Barcellona, Spagna)", lat: 41.403629, lng: 2.174356 },
+      { name: "Cattedrale di Notre-Dame (Parigi, Francia)", lat: 48.852968, lng: 2.349902 },
+      { name: "Westminster Abbey (Londra, UK)", lat: 51.499356, lng: -0.127758 },
+      { name: "St. Paul's Cathedral (Londra, UK)", lat: 51.513845, lng: -0.098351 },
+      { name: "Duomo di Milano (Milano, Italia)", lat: 45.464206, lng: 9.191594 },
+      { name: "Basilica di San Marco (Venezia, Italia)", lat: 45.434046, lng: 12.339224 },
+      { name: "Cattedrale di Colonia (Colonia, Germania)", lat: 50.941278, lng: 6.958281 },
+      { name: "Cattedrale di San Basilio (Mosca, Russia)", lat: 55.752523, lng: 37.623094 },
+      { name: "Hagia Sophia (Istanbul, Turchia)", lat: 41.008583, lng: 28.980175 },
+      { name: "Church of the Savior on Spilled Blood (San Pietroburgo, Russia)", lat: 59.940060, lng: 30.328540 },
+      { name: "Catedral Metropolitana (Città del Messico, Messico)", lat: 19.434078, lng: -99.133203 },
+      { name: "Catedral de Sevilla (Siviglia, Spagna)", lat: 37.386071, lng: -5.992513 },
+      { name: "Catedral de Santiago de Compostela (Spagna)", lat: 42.880611, lng: -8.544376 },
+      { name: "Cattedrale di San Patrizio (New York, USA)", lat: 40.758465, lng: -73.975993 },
+      { name: "Basilica of the National Shrine (Washington, USA)", lat: 38.933079, lng: -77.000744 },
+      { name: "St. Mary's Basilica (Cracovia, Polonia)", lat: 50.061667, lng: 19.939722 },
+      { name: "Cathedral of Brasília (Brasile)", lat: -15.798155, lng: -47.875280 },
+      { name: "Cattedrale di Manila (Filippine)", lat: 14.591852, lng: 120.973067 },
+      { name: "Cattedrale di San Patrizio (Dublino, Irlanda)", lat: 53.339404, lng: -6.271111 },
+      { name: "Cattedrale di San Vito (Praga, Repubblica Ceca)", lat: 50.090903, lng: 14.400512 },
+      { name: "Cattedrale di Santa Maria del Fiore (Firenze, Italia)", lat: 43.773145, lng: 11.256944 }
+    ];
+
+    // Frasi spiritose (ecclesiastiche, ma safe)
+    const LINES = [
+      "Sta facendo le prove… del coro. E sembra che il direttore sia molto esigente.",
+      "Dice che è entrato “un attimo a prendere una benedizione” e si è perso tra le navate.",
+      "È in pellegrinaggio… ma ha preso la deviazione panoramica (molto panoramica).",
+      "Sta consultando il bollettino: cerca la messa più vicina con aria condizionata.",
+      "È in modalità silenziosa: sta allenando l’arte del ‘non disturbare’… in sacrestia.",
+      "Ha promesso: “solo una candela e torno”. (Classico.)",
+      "È al briefing con i santi: pianificazione e logistica, molto seri.",
+      "Sta cercando un posto in prima fila… ma ‘prima fila’ esiste solo nei suoi sogni.",
+      "Ha chiesto indicazioni e gli hanno risposto: “segui il campanile”. Sta ancora seguendo.",
+      "È in missione: trovare la panca con il miglior comfort lombare.",
+      "Ha detto che torna subito… dopo l’eco. (L’eco non molla mai.)",
+      "Si sta ‘ricaricando spiritualmente’: batteria al 3%, modalità risparmio attiva.",
+      "È entrato per evitare la pioggia e ora sta recensendo vetrate e affreschi come guida turistica.",
+      "Ha sentito un organo e ha iniziato a fare headbanging composto. Molto composto."
+    ];
+
+    const btn = document.getElementById("btn");
+    const quote = document.getElementById("quote");
+    const meta = document.getElementById("meta");
+    const counter = document.getElementById("counter");
+
+    let clicks = 0;
+
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function mapsUrl(lat, lng, label) {
+      const q = encodeURIComponent(label);
+      return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}(${q})`;
+    }
+
+    btn.addEventListener("click", () => {
+      clicks += 1;
+      counter.textContent = `${clicks} invocazioni`;
+
+      const church = pick(CHURCHES);
+      const line = pick(LINES);
+
+      quote.innerHTML = `<strong>Oracolo parrocchiale:</strong> ${line}`;
+      meta.textContent = `Possibile avvistamento: ${church.name}`;
+
+      const url = mapsUrl(church.lat, church.lng, church.name);
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
