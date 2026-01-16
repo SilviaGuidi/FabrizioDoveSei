@@ -410,19 +410,38 @@
       return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}(${q})`;
     }
 
-    btn.addEventListener("click", () => {
-      clicks += 1;
-      counter.textContent = `${clicks} invocazioni`;
+btn.addEventListener("click", () => {
+  clicks += 1;
+  counter.textContent = `${clicks} invocazioni`;
 
-      const church = pick(CHURCHES);
-      const line = pick(LINES);
+  const church = pick(CHURCHES);
+  const line = pick(LINES);
 
-      quote.innerHTML = `<strong>Oracolo parrocchiale:</strong> ${line}`;
-      meta.textContent = `Possibile avvistamento: ${church.name}`;
+  // aggiorna oracolo
+  quote.innerHTML = `<strong>Oracolo parrocchiale:</strong> ${line}`;
 
-      const url = mapsUrl(church.lat, church.lng, church.name);
-      mapsLink.href = url;
-      mapsLink.textContent = `Apri su Google Maps: ${church.name}`;
+  // aggiorna stato (se lo usi)
+  const status = document.getElementById("status");
+  if (status) {
+    status.innerHTML = `<strong>Stato attuale:</strong> avvistamento registrato. (Attendibilità: mistica.)`;
+  }
+
+  // mostra e aggiorna la card avvistamento
+  const sightingCard = document.getElementById("sightingCard");
+  const placeName = document.getElementById("placeName");
+  const mapsLink = document.getElementById("mapsLink");
+
+  const url = mapsUrl(church.lat, church.lng, church.name);
+
+  if (sightingCard) sightingCard.style.display = "block";
+  if (placeName) placeName.textContent = church.name;
+
+  if (mapsLink) {
+    mapsLink.href = url;
+    mapsLink.textContent = `Apri su Google Maps: ${church.name}`;
+  }
+});
+
     });
   </script>
 </body>
