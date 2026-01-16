@@ -420,7 +420,7 @@ btn.addEventListener("click", () => {
   // aggiorna oracolo
   quote.innerHTML = `<strong>Oracolo parrocchiale:</strong> ${line}`;
 
-  // aggiorna stato (se lo usi)
+  // aggiorna stato
   const status = document.getElementById("status");
   if (status) {
     status.innerHTML = `<strong>Stato attuale:</strong> avvistamento registrato. (Attendibilità: mistica.)`;
@@ -439,8 +439,8 @@ btn.addEventListener("click", () => {
   if (mapsLink) {
     mapsLink.href = url;
     mapsLink.textContent = `Apri su Google Maps: ${church.name}`;
-
-    });
+  }
+});
   </script>
 </body>
 </html>
