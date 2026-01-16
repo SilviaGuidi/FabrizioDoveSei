@@ -164,7 +164,7 @@
       <div class="hero">
         <span class="badge">⛪ Localizzatore Parrocchiale • modalità “scherzo gentile”</span>
         <h1>Dov’è Fabrizio?</h1>
-        <p class="subtitle">Premi il bottone e ti indico <em>con certezza spirituale</em> una chiesa a caso nel mondo.</p>
+        <p class="subtitle">Premi il bottone e ti indico <em>con certezza spirituale</em> la sua posizione precisa.</p>
       </div>
 
       <div class="row">
@@ -176,17 +176,15 @@
         </div>
 
         <div class="panel">
-          <button class="btn" id="btn">🔎 Avvia il “cercafabbrizio”</button>
+          <button class="btn" id="btn">🔎 Stanalo</button>
           <div class="small">
-            Si apre Google Maps in una nuova scheda.<br/>
-            <span class="pill">Suggerimento:</span> cambiare le chiese è facilissimo: modifica l’array <code>CHURCHES</code>.
           </div>
         </div>
       </div>
 
       <div class="footer">
         <span class="pill" id="counter">0 invocazioni</span>
-        <span>Made for amici & risate • <span class="pill">100% no blasfemia</span></span>
+        <span>Made for amici & risate • <span class="pill">95% no blasfemia</span></span>
       </div>
     </section>
   </main>
@@ -194,46 +192,171 @@
   <script>
     // Lista di chiese (nome + coordinate). Puoi aggiungerne quante vuoi.
     const CHURCHES = [
-      { name: "Basilica di San Pietro (Città del Vaticano)", lat: 41.902168, lng: 12.453937 },
-      { name: "Sagrada Família (Barcellona, Spagna)", lat: 41.403629, lng: 2.174356 },
-      { name: "Cattedrale di Notre-Dame (Parigi, Francia)", lat: 48.852968, lng: 2.349902 },
-      { name: "Westminster Abbey (Londra, UK)", lat: 51.499356, lng: -0.127758 },
-      { name: "St. Paul's Cathedral (Londra, UK)", lat: 51.513845, lng: -0.098351 },
-      { name: "Duomo di Milano (Milano, Italia)", lat: 45.464206, lng: 9.191594 },
-      { name: "Basilica di San Marco (Venezia, Italia)", lat: 45.434046, lng: 12.339224 },
-      { name: "Cattedrale di Colonia (Colonia, Germania)", lat: 50.941278, lng: 6.958281 },
-      { name: "Cattedrale di San Basilio (Mosca, Russia)", lat: 55.752523, lng: 37.623094 },
-      { name: "Hagia Sophia (Istanbul, Turchia)", lat: 41.008583, lng: 28.980175 },
-      { name: "Church of the Savior on Spilled Blood (San Pietroburgo, Russia)", lat: 59.940060, lng: 30.328540 },
-      { name: "Catedral Metropolitana (Città del Messico, Messico)", lat: 19.434078, lng: -99.133203 },
-      { name: "Catedral de Sevilla (Siviglia, Spagna)", lat: 37.386071, lng: -5.992513 },
-      { name: "Catedral de Santiago de Compostela (Spagna)", lat: 42.880611, lng: -8.544376 },
-      { name: "Cattedrale di San Patrizio (New York, USA)", lat: 40.758465, lng: -73.975993 },
-      { name: "Basilica of the National Shrine (Washington, USA)", lat: 38.933079, lng: -77.000744 },
-      { name: "St. Mary's Basilica (Cracovia, Polonia)", lat: 50.061667, lng: 19.939722 },
-      { name: "Cathedral of Brasília (Brasile)", lat: -15.798155, lng: -47.875280 },
-      { name: "Cattedrale di Manila (Filippine)", lat: 14.591852, lng: 120.973067 },
-      { name: "Cattedrale di San Patrizio (Dublino, Irlanda)", lat: 53.339404, lng: -6.271111 },
-      { name: "Cattedrale di San Vito (Praga, Repubblica Ceca)", lat: 50.090903, lng: 14.400512 },
-      { name: "Cattedrale di Santa Maria del Fiore (Firenze, Italia)", lat: 43.773145, lng: 11.256944 }
-    ];
+  // 🌍 AFRICA
+  { name: "Basilica of Our Lady of Peace (Yamoussoukro, Costa d’Avorio)", lat: 6.8185, lng: -5.2769 },
+  { name: "St. George's Cathedral (Addis Abeba, Etiopia)", lat: 9.0342, lng: 38.7468 },
+  { name: "Cathedral of the Holy Trinity (Addis Abeba, Etiopia)", lat: 9.0432, lng: 38.7461 },
+  { name: "St. Mary's Cathedral (Città del Capo, Sudafrica)", lat: -33.9284, lng: 18.4166 },
+  { name: "Sacred Heart Cathedral (Lusaka, Zambia)", lat: -15.4167, lng: 28.2833 },
+  { name: "Cathedral Basilica of Our Lady of Mount Carmel (Mombasa, Kenya)", lat: -4.0435, lng: 39.6682 },
+  { name: "St. Joseph's Cathedral (Dar es Salaam, Tanzania)", lat: -6.8168, lng: 39.2856 },
+  { name: "Cathedral of Saints Peter and Paul (Douala, Camerun)", lat: 4.0511, lng: 9.7043 },
+  { name: "Cathedral of the Holy Spirit (Accra, Ghana)", lat: 5.5560, lng: -0.1969 },
+  { name: "Saints Peter and Paul Cathedral (Kigali, Rwanda)", lat: -1.9497, lng: 30.0588 },
+
+  // 🌏 ASIA
+  { name: "St. Thomas Cathedral Basilica (Chennai, India)", lat: 13.0316, lng: 80.2785 },
+  { name: "Basilica of the Sacred Heart of Jesus (Puducherry, India)", lat: 11.9322, lng: 79.8291 },
+  { name: "St. Patrick's Cathedral (Karachi, Pakistan)", lat: 24.8616, lng: 67.0105 },
+  { name: "St. Mary's Cathedral (Yangon, Myanmar)", lat: 16.7794, lng: 96.1670 },
+  { name: "St. Joseph's Cathedral (Hanoi, Vietnam)", lat: 21.0287, lng: 105.8525 },
+  { name: "Notre-Dame Cathedral Basilica of Saigon (Ho Chi Minh City, Vietnam)", lat: 10.7798, lng: 106.6990 },
+  { name: "Manila Cathedral (Manila, Filippine)", lat: 14.5919, lng: 120.9731 },
+  { name: "Basilica Minore del Santo Niño (Cebu, Filippine)", lat: 10.2940, lng: 123.9022 },
+  { name: "St. Andrew's Cathedral (Singapore)", lat: 1.2924, lng: 103.8520 },
+  { name: "Cathedral of the Immaculate Conception (Hong Kong)", lat: 22.2770, lng: 114.1549 },
+  { name: "St. John's Cathedral (Hong Kong)", lat: 22.2787, lng: 114.1628 },
+  { name: "Myeongdong Cathedral (Seoul, Corea del Sud)", lat: 37.5639, lng: 126.9870 },
+  { name: "St. Mary's Cathedral (Tokyo, Giappone)", lat: 35.7192, lng: 139.7210 },
+  { name: "St. Joseph's Cathedral (Beijing, Cina)", lat: 39.9135, lng: 116.4057 },
+  { name: "Holy Trinity Cathedral (Shanghai, Cina)", lat: 31.2196, lng: 121.4543 },
+  { name: "St. Mary's Cathedral (Kuala Lumpur, Malesia)", lat: 3.1457, lng: 101.6935 },
+  { name: "Cathedral of St. Joseph (Colombo, Sri Lanka)", lat: 6.9320, lng: 79.8510 },
+
+  // 🌊 OCEANIA
+  { name: "St Mary's Cathedral (Sydney, Australia)", lat: -33.8728, lng: 151.2123 },
+  { name: "St Patrick's Cathedral (Melbourne, Australia)", lat: -37.8098, lng: 144.9752 },
+  { name: "St John's Cathedral (Brisbane, Australia)", lat: -27.4680, lng: 153.0260 },
+  { name: "St Paul's Cathedral (Dunedin, Nuova Zelanda)", lat: -45.8730, lng: 170.5036 },
+  { name: "Wellington Cathedral of St Paul (Wellington, Nuova Zelanda)", lat: -41.2768, lng: 174.7775 },
+  { name: "Holy Trinity Cathedral (Auckland, Nuova Zelanda)", lat: -36.8581, lng: 174.7773 },
+  { name: "Sacred Heart Cathedral (Apia, Samoa)", lat: -13.8330, lng: -171.7660 },
+
+  // 🌎 NORD AMERICA
+  { name: "St. Patrick's Cathedral (New York, USA)", lat: 40.7585, lng: -73.9760 },
+  { name: "Cathedral Basilica of St. Louis (St. Louis, USA)", lat: 38.6424, lng: -90.2545 },
+  { name: "Washington National Cathedral (Washington DC, USA)", lat: 38.9306, lng: -77.0708 },
+  { name: "Cathedral of Our Lady of the Angels (Los Angeles, USA)", lat: 34.0576, lng: -118.2453 },
+  { name: "Basilica of Sainte-Anne-de-Beaupré (Quebec, Canada)", lat: 47.0185, lng: -70.9312 },
+  { name: "Notre-Dame Basilica (Montreal, Canada)", lat: 45.5045, lng: -73.5561 },
+  { name: "Catedral Metropolitana (Città del Messico, Messico)", lat: 19.4341, lng: -99.1332 },
+
+  // 🌎 SUD AMERICA
+  { name: "Cathedral of Brasília (Brasile)", lat: -15.7982, lng: -47.8753 },
+  { name: "Metropolitan Cathedral of São Paulo (Brasile)", lat: -23.5503, lng: -46.6339 },
+  { name: "Metropolitan Cathedral of Rio de Janeiro (Brasile)", lat: -22.9119, lng: -43.1760 },
+  { name: "Catedral Metropolitana de Buenos Aires (Argentina)", lat: -34.6083, lng: -58.3732 },
+  { name: "Catedral Metropolitana de Santiago (Cile)", lat: -33.4378, lng: -70.6505 },
+  { name: "Catedral de Bogotá (Colombia)", lat: 4.5981, lng: -74.0758 },
+  { name: "Basílica del Voto Nacional (Quito, Ecuador)", lat: -0.2166, lng: -78.5073 },
+  { name: "Catedral de Lima (Perù)", lat: -12.0454, lng: -77.0305 },
+
+  // 🇪🇺 EUROPA (extra belle/classiche)
+  { name: "Sagrada Família (Barcellona, Spagna)", lat: 41.4036, lng: 2.1744 },
+  { name: "Catedral de Sevilla (Siviglia, Spagna)", lat: 37.3861, lng: -5.9925 },
+  { name: "Catedral de Santiago de Compostela (Spagna)", lat: 42.8806, lng: -8.5444 },
+  { name: "Notre-Dame de Paris (Parigi, Francia)", lat: 48.8530, lng: 2.3499 },
+  { name: "Sacré-Cœur (Parigi, Francia)", lat: 48.8867, lng: 2.3431 },
+  { name: "Westminster Abbey (Londra, UK)", lat: 51.4994, lng: -0.1278 },
+  { name: "St. Paul's Cathedral (Londra, UK)", lat: 51.5138, lng: -0.0984 },
+  { name: "Duomo di Milano (Milano, Italia)", lat: 45.4642, lng: 9.1916 },
+  { name: "Basilica di San Marco (Venezia, Italia)", lat: 45.4340, lng: 12.3392 },
+  { name: "Cattedrale di Santa Maria del Fiore (Firenze, Italia)", lat: 43.7731, lng: 11.2569 },
+  { name: "Cattedrale di San Vito (Praga, Repubblica Ceca)", lat: 50.0909, lng: 14.4005 },
+  { name: "Cattedrale di Colonia (Colonia, Germania)", lat: 50.9413, lng: 6.9583 },
+  { name: "St. Stephen's Cathedral (Vienna, Austria)", lat: 48.2084, lng: 16.3731 },
+  { name: "St. Peter's Basilica (Città del Vaticano)", lat: 41.9022, lng: 12.4539 },
+  { name: "St. Patrick's Cathedral (Dublino, Irlanda)", lat: 53.3394, lng: -6.2711 },
+  // 🏔️ L'AQUILA (città)
+  { name: "Basilica di Santa Maria di Collemaggio (L'Aquila, Italia)", lat: 42.3398, lng: 13.3929 },
+  { name: "Basilica di San Bernardino (L'Aquila, Italia)", lat: 42.3496, lng: 13.3992 },
+  { name: "Cattedrale dei Santi Massimo e Giorgio (L'Aquila, Italia)", lat: 42.3508, lng: 13.3999 },
+  { name: "Chiesa di Santa Maria del Suffragio (Anime Sante) (L'Aquila, Italia)", lat: 42.3505, lng: 13.3992 },
+  { name: "Chiesa di San Silvestro (L'Aquila, Italia)", lat: 42.3513, lng: 13.4009 },
+  { name: "Chiesa di San Pietro a Coppito (L'Aquila, Italia)", lat: 42.3526, lng: 13.3961 },
+  { name: "Chiesa di Santa Giusta (L'Aquila, Italia)", lat: 42.3545, lng: 13.3969 },
+  { name: "Chiesa di Santa Maria Paganica (L'Aquila, Italia)", lat: 42.3510, lng: 13.4029 },
+  { name: "Chiesa di San Domenico (L'Aquila, Italia)", lat: 42.3498, lng: 13.3966 },
+  { name: "Chiesa di Sant'Agostino (L'Aquila, Italia)", lat: 42.3501, lng: 13.3979 },
+  { name: "Chiesa di San Marco (L'Aquila, Italia)", lat: 42.3494, lng: 13.4012 },
+  { name: "Chiesa di San Francesco di Paola (L'Aquila, Italia)", lat: 42.3487, lng: 13.4010 },
+  { name: "Chiesa di San Bernardino da Siena (ex Convento) (L'Aquila, Italia)", lat: 42.3491, lng: 13.3988 },
+  { name: "Chiesa di Santa Maria del Carmine (L'Aquila, Italia)", lat: 42.3520, lng: 13.4043 },
+  { name: "Chiesa di San Giuseppe dei Minimi (L'Aquila, Italia)", lat: 42.3490, lng: 13.4041 },
+  // Zone/Quartieri (sempre L'Aquila)
+  { name: "Santuario della Madonna d'Appari (Pettino, L'Aquila, Italia)", lat: 42.3751, lng: 13.3446 },
+  { name: "Chiesa di San Giuseppe Artigiano (L'Aquila, Italia)", lat: 42.3642, lng: 13.3836 },
+  { name: "Chiesa di San Pio X (L'Aquila, Italia)", lat: 42.3684, lng: 13.3926 },
+  { name: "Chiesa di San Giovanni Bosco (L'Aquila, Italia)", lat: 42.3602, lng: 13.3908 },
+  { name: "Chiesa di Santa Maria Ausiliatrice (L'Aquila, Italia)", lat: 42.3612, lng: 13.3879 },
+  { name: "Chiesa di Santa Maria Madre di Dio (L'Aquila, Italia)", lat: 42.3571, lng: 13.4122 }
+  // 🏘️ FRAZIONI / DINTORNI IMMEDIATI
+  { name: "Chiesa di Santa Maria Assunta (Paganica, L'Aquila, Italia)", lat: 42.3517, lng: 13.4909 },
+  { name: "Chiesa di San Giustino (Paganica, L'Aquila, Italia)", lat: 42.3540, lng: 13.4890 },
+  { name: "Abbazia di San Giovanni Battista (Lucoli, Italia)", lat: 42.2919, lng: 13.3437 },
+  { name: "Santuario della Madonna di Roio (Roio, L'Aquila, Italia)", lat: 42.3333, lng: 13.4269 },
+
+  // ⛰️ GRAN SASSO / ASSETRGI / CAMPO IMPERATORE (zona)
+  { name: "Chiesa di Santa Maria Assunta (Assergi, Italia)", lat: 42.4208, lng: 13.4920 },
+  { name: "Santuario di San Gabriele dell’Addolorata (Isola del Gran Sasso, Italia)", lat: 42.5038, lng: 13.6604 },
+
+  // 🏞️ AMITERNUM / SAN VITTORINO / PRETURO
+  { name: "Catacombe di San Vittorino (San Vittorino, L'Aquila, Italia)", lat: 42.4036, lng: 13.3095 },
+
+  // 🌄 NAVELLI / CAPESTRANO / SANTO STEFANO
+  { name: "Abbazia di Santo Spirito al Morrone (Sulmona, Italia)", lat: 42.0514, lng: 13.9292 }, // un po' più lontana ma iconica
+  { name: "Chiesa di Santa Maria di Centurelli (Caporciano, Italia)", lat: 42.2483, lng: 13.6564 },
+  { name: "Abbazia di Santa Maria di Propezzano (Morro d'Oro, Italia)", lat: 42.7851, lng: 13.9403 }, // lontanina, ma bellissima
+
+  // 🏰 CASTEL DEL MONTE / CALASCIO / ROCCA CALASCIO
+  { name: "Chiesa di San Marco (Castel del Monte, Italia)", lat: 42.3653, lng: 13.7260 },
+  { name: "Chiesa di Santa Maria della Pietà (Rocca Calascio, Italia)", lat: 42.3264, lng: 13.6943 },
+
+  // 🌲 SCANNO / SULMONA / ABRUZZO PIÙ AMPIO (bonus)
+  { name: "Cattedrale di San Panfilo (Sulmona, Italia)", lat: 42.0475, lng: 13.9264 },
+  { name: "Basilica della Madonna del Ponte (Lanciano, Italia)", lat: 42.2290, lng: 14.3899 }
+]
+
 
     // Frasi spiritose (ecclesiastiche, ma safe)
     const LINES = [
-      "Sta facendo le prove… del coro. E sembra che il direttore sia molto esigente.",
-      "Dice che è entrato “un attimo a prendere una benedizione” e si è perso tra le navate.",
-      "È in pellegrinaggio… ma ha preso la deviazione panoramica (molto panoramica).",
+      "Sta facendo le prove del coro, il direttore è molto esigente.",
+      "Dice che è entrato “un attimo a prendere una benedizione”",
+      "Pellegrinaggio in corso",
       "Sta consultando il bollettino: cerca la messa più vicina con aria condizionata.",
-      "È in modalità silenziosa: sta allenando l’arte del ‘non disturbare’… in sacrestia.",
-      "Ha promesso: “solo una candela e torno”. (Classico.)",
-      "È al briefing con i santi: pianificazione e logistica, molto seri.",
-      "Sta cercando un posto in prima fila… ma ‘prima fila’ esiste solo nei suoi sogni.",
-      "Ha chiesto indicazioni e gli hanno risposto: “segui il campanile”. Sta ancora seguendo.",
-      "È in missione: trovare la panca con il miglior comfort lombare.",
-      "Ha detto che torna subito… dopo l’eco. (L’eco non molla mai.)",
-      "Si sta ‘ricaricando spiritualmente’: batteria al 3%, modalità risparmio attiva.",
-      "È entrato per evitare la pioggia e ora sta recensendo vetrate e affreschi come guida turistica.",
-      "Ha sentito un organo e ha iniziato a fare headbanging composto. Molto composto."
+      "È in modalità silenziosa: sta allenando l’arte del ‘non disturbare’ in sacrestia.",
+      "Ha promesso: “solo una candela e torno”. (Classic Fabrizio.)",
+      "Briefing con i santi in corso.",
+      "Sta cercando un posto in prima fila, quei canti non si canteranno da soli.",
+      "Sta seguendo la stella cometa.",
+      "Sta cercando la panca con il miglior comfort lombare.",
+      "È entrato per usare il bagno ed l'hanno incastrato per la messa.",
+      "Ha sentito un organo e ha tirato fuori la chitarra per una jam session cristiana.",
+      "Sta facendo il chierichetto per pagarsi i debiti karmici.",
+      "È rimasto bloccato nel confessionale: ora sta facendo assistenza clienti.",
+      "Ha provato a uscire ma c’era il signore con la stretta di mano infinita.",
+      "Sta accendendo candele come se da questo dipendesse la sua vita.",
+      "Ha preso l’acqua santa e l’ha usata come se fosse un power-up.",
+      "Ha chiesto dov’è l’uscita e gli hanno risposto: “segui la luce”. Fine.",
+      "Ha detto “non canto” e ora è nel coro, microfono acceso, volume a palla.",
+      "È entrato solo per guardare un attimo… adesso sta smontando i banchi.",
+      "È intrappolato tra due nonne che lo hanno adottato spiritualmente.",
+      "Sta cercando l’amen perfetto, quello che chiude con stile.",
+      "Dice che era solo di passaggio e ora sta organizzando la processione.",
+      "È entrato per un minuto e gli hanno affidato un incarico. Classic Fabrizio.",
+      "Sta discutendo con il parroco di teologia e playlist. Sta perdendo entrambe.",
+      "Sta facendo il segno della croce con una sicurezza che non possiede.",
+      "Ha provato a salutare con discrezione… e ora sta dando la pace a tutta la città.",
+      "Sta cercando un posto “strategico” ma ogni posto è controllato dalle nonne.",
+      "È entrato per ripararsi dal freddo e ora sta vivendo lì. Affitto compreso.",
+      "Ha chiesto “dov’è Fabrizio” e gli hanno risposto: “è già qui”. Paradosso.",
+      "Ha trovato una candela profumata e ora sta facendo shopping spirituale.",
+      "Si è seduto e ha scelto proprio la panca che scricchiola.",
+      "Sta cercando un prete libero per due chiacchiere… auguri.",
+      "Ha detto “torno subito” e poi è iniziato il rosario. Rip.",
+      "Ha scambiato la sacrestia per l’uscita: adesso è staff tecnico.",
+      "È entrato per curiosità e ora sta facendo il tour guidato come se fosse suo.",
+      "Sta cercando il bagno ma ogni corridoio è un livello di un dungeon."
     ];
 
     const btn = document.getElementById("btn");
