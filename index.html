@@ -162,7 +162,7 @@
   <main class="wrap">
     <section class="card">
       <div class="hero">
-        <span class="badge">⛪ Localizzatore Parrocchiale • modalità “scherzo gentile”</span>
+        <span class="badge">⛪ Localizzatore Parrocchiale</span>
         <h1>Dov’è Fabrizio?</h1>
         <p class="subtitle">Premi il bottone e ti indico <em>con certezza spirituale</em> la sua posizione precisa.</p>
       </div>
@@ -191,7 +191,7 @@
 
   <script>
     // Lista di chiese (nome + coordinate). Puoi aggiungerne quante vuoi.
-    const CHURCHES = [
+const CHURCHES = [
   // 🌍 AFRICA
   { name: "Basilica of Our Lady of Peace (Yamoussoukro, Costa d’Avorio)", lat: 6.8185, lng: -5.2769 },
   { name: "St. George's Cathedral (Addis Abeba, Etiopia)", lat: 9.0342, lng: 38.7468 },
@@ -251,7 +251,7 @@
   { name: "Basílica del Voto Nacional (Quito, Ecuador)", lat: -0.2166, lng: -78.5073 },
   { name: "Catedral de Lima (Perù)", lat: -12.0454, lng: -77.0305 },
 
-  // 🇪🇺 EUROPA (extra belle/classiche)
+  // 🇪🇺 EUROPA
   { name: "Sagrada Família (Barcellona, Spagna)", lat: 41.4036, lng: 2.1744 },
   { name: "Catedral de Sevilla (Siviglia, Spagna)", lat: 37.3861, lng: -5.9925 },
   { name: "Catedral de Santiago de Compostela (Spagna)", lat: 42.8806, lng: -8.5444 },
@@ -267,7 +267,8 @@
   { name: "St. Stephen's Cathedral (Vienna, Austria)", lat: 48.2084, lng: 16.3731 },
   { name: "St. Peter's Basilica (Città del Vaticano)", lat: 41.9022, lng: 12.4539 },
   { name: "St. Patrick's Cathedral (Dublino, Irlanda)", lat: 53.3394, lng: -6.2711 },
-  // 🏔️ L'AQUILA (città)
+
+  // 🏔️ L'AQUILA (città e dintorni)
   { name: "Basilica di Santa Maria di Collemaggio (L'Aquila, Italia)", lat: 42.3398, lng: 13.3929 },
   { name: "Basilica di San Bernardino (L'Aquila, Italia)", lat: 42.3496, lng: 13.3992 },
   { name: "Cattedrale dei Santi Massimo e Giorgio (L'Aquila, Italia)", lat: 42.3508, lng: 13.3999 },
@@ -283,81 +284,69 @@
   { name: "Chiesa di San Bernardino da Siena (ex Convento) (L'Aquila, Italia)", lat: 42.3491, lng: 13.3988 },
   { name: "Chiesa di Santa Maria del Carmine (L'Aquila, Italia)", lat: 42.3520, lng: 13.4043 },
   { name: "Chiesa di San Giuseppe dei Minimi (L'Aquila, Italia)", lat: 42.3490, lng: 13.4041 },
-  // Zone/Quartieri (sempre L'Aquila)
   { name: "Santuario della Madonna d'Appari (Pettino, L'Aquila, Italia)", lat: 42.3751, lng: 13.3446 },
   { name: "Chiesa di San Giuseppe Artigiano (L'Aquila, Italia)", lat: 42.3642, lng: 13.3836 },
   { name: "Chiesa di San Pio X (L'Aquila, Italia)", lat: 42.3684, lng: 13.3926 },
   { name: "Chiesa di San Giovanni Bosco (L'Aquila, Italia)", lat: 42.3602, lng: 13.3908 },
   { name: "Chiesa di Santa Maria Ausiliatrice (L'Aquila, Italia)", lat: 42.3612, lng: 13.3879 },
-  { name: "Chiesa di Santa Maria Madre di Dio (L'Aquila, Italia)", lat: 42.3571, lng: 13.4122 }
-  // 🏘️ FRAZIONI / DINTORNI IMMEDIATI
+  { name: "Chiesa di Santa Maria Madre di Dio (L'Aquila, Italia)", lat: 42.3571, lng: 13.4122 },
+
   { name: "Chiesa di Santa Maria Assunta (Paganica, L'Aquila, Italia)", lat: 42.3517, lng: 13.4909 },
   { name: "Chiesa di San Giustino (Paganica, L'Aquila, Italia)", lat: 42.3540, lng: 13.4890 },
   { name: "Abbazia di San Giovanni Battista (Lucoli, Italia)", lat: 42.2919, lng: 13.3437 },
   { name: "Santuario della Madonna di Roio (Roio, L'Aquila, Italia)", lat: 42.3333, lng: 13.4269 },
-
-  // ⛰️ GRAN SASSO / ASSETRGI / CAMPO IMPERATORE (zona)
   { name: "Chiesa di Santa Maria Assunta (Assergi, Italia)", lat: 42.4208, lng: 13.4920 },
   { name: "Santuario di San Gabriele dell’Addolorata (Isola del Gran Sasso, Italia)", lat: 42.5038, lng: 13.6604 },
-
-  // 🏞️ AMITERNUM / SAN VITTORINO / PRETURO
   { name: "Catacombe di San Vittorino (San Vittorino, L'Aquila, Italia)", lat: 42.4036, lng: 13.3095 },
-
-  // 🌄 NAVELLI / CAPESTRANO / SANTO STEFANO
-  { name: "Abbazia di Santo Spirito al Morrone (Sulmona, Italia)", lat: 42.0514, lng: 13.9292 }, // un po' più lontana ma iconica
+  { name: "Abbazia di Santo Spirito al Morrone (Sulmona, Italia)", lat: 42.0514, lng: 13.9292 },
   { name: "Chiesa di Santa Maria di Centurelli (Caporciano, Italia)", lat: 42.2483, lng: 13.6564 },
-  { name: "Abbazia di Santa Maria di Propezzano (Morro d'Oro, Italia)", lat: 42.7851, lng: 13.9403 }, // lontanina, ma bellissima
-
-  // 🏰 CASTEL DEL MONTE / CALASCIO / ROCCA CALASCIO
+  { name: "Abbazia di Santa Maria di Propezzano (Morro d'Oro, Italia)", lat: 42.7851, lng: 13.9403 },
   { name: "Chiesa di San Marco (Castel del Monte, Italia)", lat: 42.3653, lng: 13.7260 },
   { name: "Chiesa di Santa Maria della Pietà (Rocca Calascio, Italia)", lat: 42.3264, lng: 13.6943 },
-
-  // 🌲 SCANNO / SULMONA / ABRUZZO PIÙ AMPIO (bonus)
   { name: "Cattedrale di San Panfilo (Sulmona, Italia)", lat: 42.0475, lng: 13.9264 },
   { name: "Basilica della Madonna del Ponte (Lanciano, Italia)", lat: 42.2290, lng: 14.3899 }
-]
+];
 
+const LINES = [
+  "Sta facendo le prove del coro, il direttore è molto esigente.",
+  "Dice che è entrato \"un attimo a prendere una benedizione\"",
+  "Pellegrinaggio in corso.",
+  "Sta consultando il bollettino: cerca la messa più vicina con aria condizionata.",
+  "È in modalità silenziosa: sta allenando l’arte del 'non disturbare' in sacrestia.",
+  "Ha promesso: \"solo una candela e torno\". (Classic Fabrizio.)",
+  "Briefing con i santi in corso.",
+  "Sta cercando un posto in prima fila, quei canti non si canteranno da soli.",
+  "Sta seguendo la stella cometa.",
+  "Sta cercando la panca con il miglior comfort lombare.",
+  "È entrato per usare il bagno e l'hanno incastrato per la messa.",
+  "Ha sentito un organo e ha tirato fuori la chitarra per una jam session cristiana.",
+  "Sta facendo il chierichetto per pagarsi i debiti karmici.",
+  "È rimasto bloccato nel confessionale: ora sta facendo assistenza clienti.",
+  "Ha provato a uscire ma c’era il signore con la stretta di mano infinita.",
+  "Sta accendendo candele come se da questo dipendesse la sua vita.",
+  "Ha preso l’acqua santa e l’ha usata come se fosse un power-up.",
+  "Ha chiesto dov’è l’uscita e gli hanno risposto: \"segui la luce\". Fine.",
+  "Ha detto \"non canto\" e ora è nel coro, microfono acceso, volume a palla.",
+  "È entrato solo per guardare un attimo… adesso sta smontando i banchi.",
+  "È intrappolato tra due nonne che lo hanno adottato spiritualmente.",
+  "Sta cercando l’amen perfetto, quello che chiude con stile.",
+  "Dice che era solo di passaggio e ora sta organizzando la processione.",
+  "È entrato per un minuto e gli hanno affidato un incarico. Classic Fabrizio.",
+  "Sta discutendo con il parroco di teologia e playlist. Sta perdendo entrambe.",
+  "Sta facendo il segno della croce con una sicurezza che non possiede.",
+  "Ha provato a salutare con discrezione… e ora sta dando la pace a tutta la città.",
+  "Sta cercando un posto \"strategico\" ma ogni posto è controllato dalle nonne.",
+  "È entrato per ripararsi dal freddo e ora sta vivendo lì. Affitto compreso.",
+  "Ha chiesto \"dov’è Fabrizio\" e gli hanno risposto: \"è già qui\". Paradosso.",
+  "Ha trovato una candela profumata e ora sta facendo shopping spirituale.",
+  "Si è seduto e ha scelto proprio la panca che scricchiola.",
+  "Sta cercando un prete libero per due chiacchiere… auguri.",
+  "Ha detto \"torno subito\" e poi è iniziato il rosario. Rip.",
+  "Ha scambiato la sacrestia per l’uscita: adesso è staff tecnico.",
+  "È entrato per curiosità e ora sta facendo il tour guidato come se fosse suo.",
+  "Sta cercando il bagno ma ogni corridoio è un livello di un dungeon."
+];
 
-    // Frasi spiritose (ecclesiastiche, ma safe)
-    const LINES = [
-      "Sta facendo le prove del coro, il direttore è molto esigente.",
-      "Dice che è entrato “un attimo a prendere una benedizione”",
-      "Pellegrinaggio in corso",
-      "Sta consultando il bollettino: cerca la messa più vicina con aria condizionata.",
-      "È in modalità silenziosa: sta allenando l’arte del ‘non disturbare’ in sacrestia.",
-      "Ha promesso: “solo una candela e torno”. (Classic Fabrizio.)",
-      "Briefing con i santi in corso.",
-      "Sta cercando un posto in prima fila, quei canti non si canteranno da soli.",
-      "Sta seguendo la stella cometa.",
-      "Sta cercando la panca con il miglior comfort lombare.",
-      "È entrato per usare il bagno ed l'hanno incastrato per la messa.",
-      "Ha sentito un organo e ha tirato fuori la chitarra per una jam session cristiana.",
-      "Sta facendo il chierichetto per pagarsi i debiti karmici.",
-      "È rimasto bloccato nel confessionale: ora sta facendo assistenza clienti.",
-      "Ha provato a uscire ma c’era il signore con la stretta di mano infinita.",
-      "Sta accendendo candele come se da questo dipendesse la sua vita.",
-      "Ha preso l’acqua santa e l’ha usata come se fosse un power-up.",
-      "Ha chiesto dov’è l’uscita e gli hanno risposto: “segui la luce”. Fine.",
-      "Ha detto “non canto” e ora è nel coro, microfono acceso, volume a palla.",
-      "È entrato solo per guardare un attimo… adesso sta smontando i banchi.",
-      "È intrappolato tra due nonne che lo hanno adottato spiritualmente.",
-      "Sta cercando l’amen perfetto, quello che chiude con stile.",
-      "Dice che era solo di passaggio e ora sta organizzando la processione.",
-      "È entrato per un minuto e gli hanno affidato un incarico. Classic Fabrizio.",
-      "Sta discutendo con il parroco di teologia e playlist. Sta perdendo entrambe.",
-      "Sta facendo il segno della croce con una sicurezza che non possiede.",
-      "Ha provato a salutare con discrezione… e ora sta dando la pace a tutta la città.",
-      "Sta cercando un posto “strategico” ma ogni posto è controllato dalle nonne.",
-      "È entrato per ripararsi dal freddo e ora sta vivendo lì. Affitto compreso.",
-      "Ha chiesto “dov’è Fabrizio” e gli hanno risposto: “è già qui”. Paradosso.",
-      "Ha trovato una candela profumata e ora sta facendo shopping spirituale.",
-      "Si è seduto e ha scelto proprio la panca che scricchiola.",
-      "Sta cercando un prete libero per due chiacchiere… auguri.",
-      "Ha detto “torno subito” e poi è iniziato il rosario. Rip.",
-      "Ha scambiato la sacrestia per l’uscita: adesso è staff tecnico.",
-      "È entrato per curiosità e ora sta facendo il tour guidato come se fosse suo.",
-      "Sta cercando il bagno ma ogni corridoio è un livello di un dungeon."
-    ];
 
     const btn = document.getElementById("btn");
     const quote = document.getElementById("quote");
